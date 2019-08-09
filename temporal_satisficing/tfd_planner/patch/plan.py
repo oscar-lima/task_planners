@@ -7,25 +7,24 @@ It contains some methods to resolve global paths + it saves temporary some files
 
 import subprocess
 import sys
-import shutil
 
 # to resolve the path to translate.py, preprocess and search
 import rospkg
 import os
 
-def main():
-    def run(*args, **kwargs):
-        input = kwargs.pop('input', None)
-        output = kwargs.pop('output', None)
-        assert not kwargs
-        redirections = {}
-        if input:
-            redirections['stdin'] = open(input)
-        if output:
-            redirections['stdout'] = open(output, 'w')
-        print args, redirections
-        subprocess.check_call(sum([arg.split('+') for arg in args],[]), **redirections)
+def run(*args, **kwargs):
+    input = kwargs.pop('input', None)
+    output = kwargs.pop('output', None)
+    assert not kwargs
+    redirections = {}
+    if input:
+        redirections['stdin'] = open(input)
+    if output:
+        redirections['stdout'] = open(output, 'w')
+    print args, redirections
+    subprocess.check_call(sum([arg.split('+') for arg in args],[]), **redirections)
 
+def main():
     config, domain, problem, result_name = sys.argv[1:]
 
     # get an instance of RosPack with the default search paths
