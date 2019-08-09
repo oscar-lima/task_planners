@@ -16,4 +16,3 @@ add_custom_target(
 )
 
 catkin_package()
-catkin_python_setup()
