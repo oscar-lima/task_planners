@@ -11,6 +11,9 @@ tfd_planner: $(SOURCE_DIR)/unpacked
 	echo 'Compiling tfd planner preprocess (1/2) ...'
 	make release --directory=$(SOURCE_DIR)/downward/preprocess
 	echo 'Compiling tfd planner search (2/2) ...'
+	cp patch/globals.cc $(SOURCE_DIR)/downward/search/globals.cc
+	cp patch/cyclic_cg_heuristic.h $(SOURCE_DIR)/downward/search/cyclic_cg_heuristic.h
+	cp patch/state.h $(SOURCE_DIR)/downward/search/state.h
 	make release CCOPT="-Wall -W -Wno-sign-compare -ansi -pedantic" --directory=$(SOURCE_DIR)/downward/search
 
 clean:
