@@ -1,0 +1,21 @@
+all: tfd_planner
+
+TARBALL = build/tfd-src-0.4.tgz
+TARBALL_URL = 'http://gki.informatik.uni-freiburg.de/tools/tfd/downloads/version-0.4/tfd-src-0.4.tgz'
+SOURCE_DIR = build/tfd-src-0.4
+UNPACK_CMD = tar -xvzf
+include $(shell rospack find mk)/download_unpack_build.mk
+
+tfd_planner: $(SOURCE_DIR)/unpacked
+	echo "hello: " $(SOURCE_DIR)
+	echo 'Compiling tfd planner preprocess (1/2) ...'
+	make release --directory=$(SOURCE_DIR)/downward/preprocess
+	echo 'Compiling tfd planner search (2/2) ...'
+	make release CCOPT="-Wall -W -Wno-sign-compare -ansi -pedantic" --directory=$(SOURCE_DIR)/downward/search
+
+clean:
+	$(MAKE) -C "$(SOURCE_DIR)/downward/preprocess" clean
+	$(MAKE) -C "$(SOURCE_DIR)/downward/search" clean
+
+wipe:
+	rm -rf build

@@ -1,0 +1,5 @@
+build/
+
+# automatically generated plans
+plan.pddl
+tfdplan.1

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <name>tfd_planner</name>
+  <version>1.0.0</version>
+  <description>
+      Temporal Fast Downward (TFD), temporal task planning system.
+      Used for decision making in robotics, directly usable in ROSPlan framework.
+  </description>
+
+  <maintainer email="oscar.lima@dfki.de">Oscar Lima</maintainer>
+
+  <license>GPLv2</license>
+
+  <url type="website">http://gki.informatik.uni-freiburg.de/tools/tfd/</url>
+
+  <!-- Author of this wrapper only, see list below for a list of planner authors -->
+  <author email="oscar.lima@dfki.de">Oscar Lima</author>
+
+  <!-- The following is a list of the original authors of the planner, as stated in their website -->
+  <author email="gabriele.roeger@unibas.ch">Gabriele Röger</author>
+  <author email="eyerich@informatik.uni-freiburg.de">Patrick Eyerich</author>
+  <author email="dornhege@informatik.uni-freiburg.de">Christian Dornhege</author>
+  <author email="mattmuel@informatik.uni-freiburg.de">Robert Mattmüller</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>mk</build_depend>
+  
+</package>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- arguments -->
+    <arg name="use_problem_topic"    default="true" />
+    <arg name="problem_topic"        default="/rosplan_problem_interface/problem_instance" />
+    <arg name="planner_topic"        default="planner_output" />
+    <arg name="data_path"            default="$(find tfd_planner)/test/pddl/turtlebot" />
+    <arg name="domain_path"          default="$(arg data_path)/domain.pddl" />
+    <arg name="problem_path"         default="$(arg data_path)/problem.pddl" />
+    <arg name="planner_path"         default="$(find tfd_planner)/build/tfd-src-0.4/downward" />
+    <arg name="planner_command"      default="timeout 10 $(arg planner_path)/plan.py y+Y+a+e+r+O+1+C+1+b DOMAIN PROBLEM $(arg data_path)/tfdplan" />
+    <arg name="knowledge_base"       default="rosplan_knowledge_base" />
+    <arg name="planning_language"    default="PDDL" /> <!-- Can be RDDL, PPDDL or PDDL -->
+
+    <!-- knowledge base -->
+    <node pkg="rosplan_knowledge_base" type="knowledgeBase" name="$(arg knowledge_base)" respawn="false" output="screen">
+        <param name="domain_path" value="$(arg domain_path)" />
+        <param name="problem_path" value="$(arg problem_path)" />
+        <!-- conditional planning flags -->
+        <param name="use_unknowns" value="false" />
+    </node>
+
+    <!-- problem generation -->
+    <node pkg="rosplan_planning_system" type="problemInterface" name="rosplan_problem_interface" respawn="false" output="screen">
+        <param name="knowledge_base" value="$(arg knowledge_base)" />
+        <param name="domain_path"    value="$(arg domain_path)" />
+        <param name="problem_path"   value="$(arg problem_path)" />
+        <param name="problem_topic"  value="$(arg problem_topic)" />
+        <param name="planning_language"  value="$(arg planning_language)" />
+    </node>
+    
+    <!-- planner interface -->
+    <node pkg="rosplan_planning_system" type="tfd_planner_interface" name="rosplan_planner_interface" respawn="false" output="screen">
+
+        <!-- general options -->
+        <param name="use_problem_topic" value="$(arg use_problem_topic)" />
+
+        <!-- ros topics -->
+        <param name="problem_topic" value="$(arg problem_topic)" />
+        <param name="planner_topic" value="$(arg planner_topic)" />
+
+        <!-- directory for files -->
+        <param name="domain_path" value="$(arg domain_path)" />
+        <param name="problem_path" value="$(arg problem_path)" />
+        <param name="data_path" value="$(arg data_path)" />
+
+        <!-- to run the planner -->
+        <param name="planner_command" value="$(arg planner_command)" />
+    </node>
+
+</launch>
