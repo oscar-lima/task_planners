@@ -1,0 +1,22 @@
+all: tfd_planner
+
+TARBALL = build/popf-1.1.tar.gz
+TARBALL_URL = 'https://sourceforge.net/projects/tsgp/files/POPF/popf-1.1.tar.gz/download'
+SOURCE_DIR = build/popf-1.1
+UNPACK_CMD = tar xvzf
+include $(shell rospack find mk)/download_unpack_build.mk
+
+tfd_planner: $(SOURCE_DIR)/unpacked
+	echo "hello: " $(SOURCE_DIR)
+	echo 'Patching popf planner (1/2) ...'
+	cp patch/FFSolver.cpp $(SOURCE_DIR)/src/popf/FFSolver.cpp
+	cp patch/popfMain.cpp $(SOURCE_DIR)/src/popf/popfMain.cpp
+	cp patch/ptree.h $(SOURCE_DIR)/src/VALfiles/parsing/ptree.h
+	echo 'Compiling popf planner (2/2) ...'
+	cd $(SOURCE_DIR)/build && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../src && cd popf && make
+
+clean:
+	cd $(SOURCE_DIR)/build && $(MAKE) clean
+
+wipe:
+	rm -rf build

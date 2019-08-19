@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <name>popf_planner</name>
+  <version>1.0.0</version>
+  <description>
+      Forward chaining temporal planner (POPF), temporal task planning system.
+      Used for decision making in robotics, directly usable in ROSPlan framework.
+  </description>
+
+  <maintainer email="oscar.lima@dfki.de">Oscar Lima</maintainer>
+
+  <license>GPLv2</license>
+
+  <url type="website">https://nms.kcl.ac.uk/planning/software/popf.html</url>
+
+  <!-- Author of this wrapper only, see list below for a list of planner authors -->
+  <author email="oscar.lima@dfki.de">Oscar Lima</author>
+
+  <!-- The following is a list of the original authors of the planner, as stated in their website -->
+  <author email="amanda.coles@kcl.ac.uk">Amanda Coles</author>
+  <author email="andrew.coles@kcl.ac.uk">Andrew Coles</author>
+  <author email="maria.fox@kcl.ac.uk">Maria Fox</author>
+  <author email="derek.long@kcl.ac.uk">Derek Long</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>mk</build_depend>
+  
+</package>
